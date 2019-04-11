@@ -27,18 +27,34 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lbAccount = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listUser = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tALogOutput = new javax.swing.JTextArea();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        lbAccount.setText("jLabel1");
+        lbAccount.setBorder(javax.swing.BorderFactory.createTitledBorder("Account"));
+        getContentPane().add(lbAccount, java.awt.BorderLayout.PAGE_END);
+
+        listUser.setBorder(javax.swing.BorderFactory.createTitledBorder("User"));
+        listUser.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(listUser);
+
+        getContentPane().add(jScrollPane1, java.awt.BorderLayout.LINE_START);
+
+        tALogOutput.setColumns(20);
+        tALogOutput.setRows(5);
+        tALogOutput.setBorder(javax.swing.BorderFactory.createTitledBorder("Log-output"));
+        jScrollPane2.setViewportView(tALogOutput);
+
+        getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +95,10 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbAccount;
+    private javax.swing.JList<String> listUser;
+    private javax.swing.JTextArea tALogOutput;
     // End of variables declaration//GEN-END:variables
 }
