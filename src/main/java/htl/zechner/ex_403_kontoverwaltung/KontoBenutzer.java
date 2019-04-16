@@ -24,6 +24,7 @@ public class KontoBenutzer implements Runnable {
         this.name = name;
         this.konto = konto;
 //        this.setName(name);
+
         this.ta = ta;
     }
 
