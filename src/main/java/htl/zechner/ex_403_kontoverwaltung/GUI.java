@@ -5,6 +5,10 @@
  */
 package htl.zechner.ex_403_kontoverwaltung;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author oskar
@@ -14,9 +18,18 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
+    
+    private DefaultListModel dlm;
     public GUI() {
         initComponents();
+        
+        
+         dlm = new DefaultListModel();
+        listUser.setModel(dlm);
     }
+    
+    private Konto konto;
+    private ArrayList<KontoBenutzer> benutzer=new ArrayList<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,11 +40,40 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        btAddUser = new javax.swing.JMenuItem();
+        btTesten = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        btAddKonto = new javax.swing.JMenuItem();
         lbAccount = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listUser = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tALogOutput = new javax.swing.JTextArea();
+
+        btAddUser.setText("add a User");
+        btAddUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddUserActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(btAddUser);
+
+        btTesten.setText("testen");
+        btTesten.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTestenActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(btTesten);
+
+        btAddKonto.setText("add Konto");
+        btAddKonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddKontoActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(btAddKonto);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +87,7 @@ public class GUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listUser.setComponentPopupMenu(jPopupMenu1);
         jScrollPane1.setViewportView(listUser);
 
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.LINE_START);
@@ -52,12 +95,33 @@ public class GUI extends javax.swing.JFrame {
         tALogOutput.setColumns(20);
         tALogOutput.setRows(5);
         tALogOutput.setBorder(javax.swing.BorderFactory.createTitledBorder("Log-output"));
+        tALogOutput.setComponentPopupMenu(jPopupMenu2);
         jScrollPane2.setViewportView(tALogOutput);
 
         getContentPane().add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddUserActionPerformed
+        String name = JOptionPane.showInputDialog("enter the name of the user");
+        KontoBenutzer k = new KontoBenutzer(name, konto, tALogOutput);
+        
+        benutzer.add(k);
+        dlm.addElement(k);
+    }//GEN-LAST:event_btAddUserActionPerformed
+
+    private void btAddKontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddKontoActionPerformed
+        int amount = Integer.parseInt(JOptionPane.showInputDialog("Please enter the start amount"));
+        konto = new Konto(amount,lbAccount);
+       
+    }//GEN-LAST:event_btAddKontoActionPerformed
+
+    private void btTestenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestenActionPerformed
+        for (KontoBenutzer kontoBenutzer : benutzer) {
+//            kontoBenutzer.start();
+        }
+    }//GEN-LAST:event_btTestenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -95,6 +159,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem btAddKonto;
+    private javax.swing.JMenuItem btAddUser;
+    private javax.swing.JMenuItem btTesten;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAccount;
