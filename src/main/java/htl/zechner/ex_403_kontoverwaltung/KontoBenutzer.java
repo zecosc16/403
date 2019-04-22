@@ -30,19 +30,18 @@ public class KontoBenutzer implements Runnable {
 
     @Override
     public void run() {
-        
+
         int i = 0;
         String out = "";
         Random r = new Random();
         while (i < 10) {
-System.out.println(Thread.currentThread().getName() + " starts");
+            System.out.println(Thread.currentThread().getName() + " starts");
             int betrag = 10 + r.nextInt(50 - 10 + 1);
 
             if (r.nextBoolean()) {
                 System.out.println(Thread.currentThread().getName() + " deposits");
                 synchronized (konto) {
                     out = konto.deposit(betrag);
-                    
 
                     ta.append(Thread.currentThread().getName() + " " + out + "\n");
                     System.out.println(Thread.currentThread().getName() + "did deposit");
