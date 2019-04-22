@@ -18,18 +18,17 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
-    
     private DefaultListModel dlm;
+
     public GUI() {
         initComponents();
-        
-        
-         dlm = new DefaultListModel();
+
+        dlm = new DefaultListModel();
         listUser.setModel(dlm);
     }
-    
+
     private Konto konto;
-    private ArrayList<KontoBenutzer> benutzer=new ArrayList<>();
+    private ArrayList<KontoBenutzer> benutzer = new ArrayList<>();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -106,15 +105,15 @@ public class GUI extends javax.swing.JFrame {
     private void btAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddUserActionPerformed
         String name = JOptionPane.showInputDialog("enter the name of the user");
         KontoBenutzer k = new KontoBenutzer(name, konto, tALogOutput);
-        
+
         benutzer.add(k);
         dlm.addElement(k);
     }//GEN-LAST:event_btAddUserActionPerformed
 
     private void btAddKontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddKontoActionPerformed
         int amount = Integer.parseInt(JOptionPane.showInputDialog("Please enter the start amount"));
-        konto = new Konto(amount,lbAccount);
-       
+        konto = new Konto(amount, lbAccount);
+
     }//GEN-LAST:event_btAddKontoActionPerformed
 
     private void btTestenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestenActionPerformed
