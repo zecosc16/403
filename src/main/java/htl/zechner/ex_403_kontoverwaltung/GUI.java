@@ -108,7 +108,6 @@ public class GUI extends javax.swing.JFrame {
         KontoBenutzer k = new KontoBenutzer(name, konto, tALogOutput);
         
         benutzer.add(k);
-        
         dlm.addElement(k);
     }//GEN-LAST:event_btAddUserActionPerformed
 
