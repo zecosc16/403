@@ -41,16 +41,7 @@ public class KontoTest {
     /**
      * Test of getAmount method, of class Konto.
      */
-    @Test
-    public void testGetAmount() {
-        System.out.println("getAmount");
-        Konto instance = null;
-        double expResult = 0.0;
-        double result = instance.getAmount();
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 
     /**
      * Test of withdraw method, of class Konto.
@@ -79,7 +70,9 @@ public class KontoTest {
      */
     @Test
     public void testDeposit() {
-        
+        Konto k = new Konto(10, new JLabel());
+        k.deposit(100);
+        assertEquals(k.getAmount(), 110,0.1);
     }
 
     /**
