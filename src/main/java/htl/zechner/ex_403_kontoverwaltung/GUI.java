@@ -119,8 +119,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddKontoActionPerformed
 
     private void btTestenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestenActionPerformed
-        for (KontoBenutzer kontoBenutzer : benutzer) {
-//            kontoBenutzer.start();
+        System.out.println("Test");
+        for (int i : listUser.getSelectedIndices()) {
+            new Thread(benutzer.get(i)).start();
         }
     }//GEN-LAST:event_btTestenActionPerformed
 

@@ -30,22 +30,26 @@ public class KontoBenutzer implements Runnable {
 
     @Override
     public void run() {
+        
         int i = 0;
         String out = "";
         Random r = new Random();
         while (i < 10) {
-
+System.out.println(Thread.currentThread().getName() + " starts");
             int betrag = 10 + r.nextInt(50 - 10 + 1);
 
             if (r.nextBoolean()) {
+                System.out.println(Thread.currentThread().getName() + " deposits");
                 synchronized (konto) {
                     out = konto.deposit(betrag);
-                    konto.notifyAll();
-                }
-                ta.append(Thread.currentThread().getName() + " " + out + "\n");
+                    
 
+                    ta.append(Thread.currentThread().getName() + " " + out + "\n");
+                    System.out.println(Thread.currentThread().getName() + "did deposit");
+                }
                 i++;
             } else {
+                System.out.println(Thread.currentThread().getName() + " withdraws");
                 synchronized (konto) {
                     try {
 
@@ -53,7 +57,9 @@ public class KontoBenutzer implements Runnable {
                         ta.append(Thread.currentThread().getName() + " " + out + "\n");
                         i++;
                     } catch (NoMoneyException ex) {
+                        System.out.println("waits");
                         try {
+                            konto.notifyAll();
                             konto.wait();
                         } catch (InterruptedException ex1) {
                             Logger.getLogger(KontoBenutzer.class.getName()).log(Level.SEVERE, null, ex1);
@@ -65,13 +71,18 @@ public class KontoBenutzer implements Runnable {
 
             }
             try {
-//                Thread.sleep(1 + r.nextInt(1000));
-                  Thread.sleep(2000);
+                Thread.sleep(1 + r.nextInt(1000));
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(KontoBenutzer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        ta.append(Thread.currentThread().getName()+" has finished \n");
+        ta.append(Thread.currentThread().getName() + " has finished \n");
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
 }
