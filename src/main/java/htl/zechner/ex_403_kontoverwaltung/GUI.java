@@ -76,7 +76,6 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbAccount.setText("jLabel1");
         lbAccount.setBorder(javax.swing.BorderFactory.createTitledBorder("Account"));
         getContentPane().add(lbAccount, java.awt.BorderLayout.PAGE_END);
 
@@ -117,9 +116,10 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddKontoActionPerformed
 
     private void btTestenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTestenActionPerformed
-        System.out.println("Test");
         for (int i : listUser.getSelectedIndices()) {
-            new Thread(benutzer.get(i)).start();
+            Thread t = new Thread(benutzer.get(i));
+            t.setName(benutzer.get(i).getName());
+            t.start();
         }
     }//GEN-LAST:event_btTestenActionPerformed
 

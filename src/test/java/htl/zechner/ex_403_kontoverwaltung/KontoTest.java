@@ -78,9 +78,6 @@ public class KontoTest {
     /**
      * Test of setLabel method, of class Konto.
      */
-    @Test
-    public void testSetLabel() {
-       
-    }
+  
     
 }

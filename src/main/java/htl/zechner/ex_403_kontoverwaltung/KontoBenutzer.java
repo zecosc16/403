@@ -20,6 +20,10 @@ public class KontoBenutzer implements Runnable {
     private Konto konto;
     private JTextArea ta;
 
+    public String getName() {
+        return name;
+    }
+
     public KontoBenutzer(String name, Konto konto, JTextArea ta) {
         this.name = name;
         this.konto = konto;
@@ -35,20 +39,17 @@ public class KontoBenutzer implements Runnable {
         String out = "";
         Random r = new Random();
         while (i < 10) {
-            System.out.println(Thread.currentThread().getName() + " starts");
             int betrag = 10 + r.nextInt(50 - 10 + 1);
 
             if (r.nextBoolean()) {
-                System.out.println(Thread.currentThread().getName() + " deposits");
                 synchronized (konto) {
                     out = konto.deposit(betrag);
 
                     ta.append(Thread.currentThread().getName() + " " + out + "\n");
-                    System.out.println(Thread.currentThread().getName() + "did deposit");
+                    konto.notifyAll();
                 }
                 i++;
             } else {
-                System.out.println(Thread.currentThread().getName() + " withdraws");
                 synchronized (konto) {
                     try {
 
@@ -56,9 +57,8 @@ public class KontoBenutzer implements Runnable {
                         ta.append(Thread.currentThread().getName() + " " + out + "\n");
                         i++;
                     } catch (NoMoneyException ex) {
-                        System.out.println("waits");
                         try {
-                            konto.notifyAll();
+
                             konto.wait();
                         } catch (InterruptedException ex1) {
                             Logger.getLogger(KontoBenutzer.class.getName()).log(Level.SEVERE, null, ex1);
